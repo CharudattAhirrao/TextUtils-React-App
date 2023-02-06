@@ -16,7 +16,7 @@ export default function About(props) {
             setAboutStyle({
                 backgroundColor: "#fff",
                 color: "#000",
-                
+
             });
             setBtnText("Enable Dark Mode")
         } else {

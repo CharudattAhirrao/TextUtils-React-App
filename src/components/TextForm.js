@@ -9,17 +9,27 @@ export default function TextForm(props) {
     const handleUpperCase = () => {
         let newText = text.toUpperCase();
         setText(newText);
+<<<<<<< HEAD
         props.showAlert("Converted to UpperCase...", "success");
+=======
+        props.showAlert("Converted to UpperCase...", "success")
+>>>>>>> d483d23d5978b2cd89c7dca31d4d0c792753fa09
     };
 
     const handleLowerCase = () => {
         let newText = text.toLowerCase();
         setText(newText);
+<<<<<<< HEAD
         props.showAlert("Converted to LowerCase...", "success");
+=======
+        props.showAlert("Converted to LowerCase...", "success")
+
+>>>>>>> d483d23d5978b2cd89c7dca31d4d0c792753fa09
     };
 
     const removeExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
+<<<<<<< HEAD
         setText(newText.join(" "));
         props.showAlert("Removed Extra Spaces...", "success");
     };
@@ -27,11 +37,27 @@ export default function TextForm(props) {
     const copyText = () => {
         navigator.clipboard.writeText(text);
         props.showAlert("Copied to Clipboard...", "success");
+=======
+        setText(newText.join(" "))
+        props.showAlert("Revoved Extra Spaces...", "success")
+
+    }
+
+    const copyText = () => {
+        navigator.clipboard.writeText(text)
+        props.showAlert("Coppied to Clipboard...", "success")
+
+>>>>>>> d483d23d5978b2cd89c7dca31d4d0c792753fa09
     };
 
     const clear = () => {
         setText("");
+<<<<<<< HEAD
         props.showAlert("Textbox Cleared...", "success");
+=======
+        props.showAlert("Text Cleared...", "success")
+
+>>>>>>> d483d23d5978b2cd89c7dca31d4d0c792753fa09
     };
 
     const handleOnChange = (event) => {
@@ -81,6 +107,7 @@ export default function TextForm(props) {
                         Clear
                     </button>
                 </div>
+<<<<<<< HEAD
 
                 <div
                     className={`card mx-auto my-3 text-bg-${props.mode} text-center`}
@@ -103,6 +130,15 @@ export default function TextForm(props) {
                             Minutes to read{" "}
                         </p>
                     </div>
+=======
+                <div className="container text-center my-5 " >
+                    <h3>Your Text Summery</h3>
+                    <p>
+                        {text.split(" ").filter((element) => { return element.length !== 0 }).length} Words | {text.length}{" "}
+                        Characters
+                    </p>
+                    <p>{text.split(" ").length * 0.008} Minutes to read </p>
+>>>>>>> d483d23d5978b2cd89c7dca31d4d0c792753fa09
                 </div>
 
                 <h3>Preview</h3>
