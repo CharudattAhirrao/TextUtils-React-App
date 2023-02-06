@@ -6,24 +6,33 @@ export default function TextForm(props) {
     const handleUpperCase = () => {
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to UpperCase...", "success")
     };
 
     const handleLowerCase = () => {
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to LowerCase...", "success")
+
     };
 
-    const removeExtraSpaces = ()=>{
+    const removeExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "))
+        props.showAlert("Revoved Extra Spaces...", "success")
+
     }
 
     const copyText = () => {
         navigator.clipboard.writeText(text)
+        props.showAlert("Coppied to Clipboard...", "success")
+
     };
 
     const clear = () => {
         setText("");
+        props.showAlert("Text Cleared...", "success")
+
     };
 
     const handleOnChange = (event) => {
@@ -68,7 +77,7 @@ export default function TextForm(props) {
                 <div className="container text-center my-5 " >
                     <h3>Your Text Summery</h3>
                     <p>
-                        {text.split(" ").filter((element)=>{return element.length!==0}).length} Words | {text.length}{" "}
+                        {text.split(" ").filter((element) => { return element.length !== 0 }).length} Words | {text.length}{" "}
                         Characters
                     </p>
                     <p>{text.split(" ").length * 0.008} Minutes to read </p>
