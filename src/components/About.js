@@ -13,7 +13,7 @@ export default function About() {
             setAboutStyle({
                 backgroundColor: "#fff",
                 color: "#000",
-                
+
             });
             setBtnText("Enable Dark Mode")
         } else {
