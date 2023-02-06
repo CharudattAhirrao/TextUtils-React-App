@@ -1,33 +1,40 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
+    
+    document.title = props.pageTitle;
+    
     const [text, setText] = useState("");
 
     const handleUpperCase = () => {
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to UpperCase...", "success");
     };
 
     const handleLowerCase = () => {
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to LowerCase...", "success");
     };
 
-    const removeExtraSpaces = ()=>{
+    const removeExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
-        setText(newText.join(" "))
-    }
+        setText(newText.join(" "));
+        props.showAlert("Removed Extra Spaces...", "success");
+    };
 
     const copyText = () => {
-        navigator.clipboard.writeText(text)
+        navigator.clipboard.writeText(text);
+        props.showAlert("Copied to Clipboard...", "success");
     };
 
     const clear = () => {
         setText("");
+        props.showAlert("Textbox Cleared...", "success");
     };
 
     const handleOnChange = (event) => {
-        console.log("OnChange");
         setText(event.target.value);
     };
 
@@ -44,37 +51,66 @@ export default function TextForm(props) {
                     onChange={handleOnChange}
                 ></textarea>
 
-                <div className="d-flex justify-content-evenly my-2">
-                    <button className="btn btn-dark" onClick={handleUpperCase}>
+                <div className="d-flex flex-wrap justify-content-evenly my-2">
+                    <button
+                        className="btn btn-dark my-2"
+                        onClick={handleUpperCase}
+                    >
                         Convert to UpperCase
                     </button>
 
-                    <button className="btn btn-dark" onClick={handleLowerCase}>
+                    <button
+                        className="btn btn-dark my-2"
+                        onClick={handleLowerCase}
+                    >
                         Convert to LowerCase
                     </button>
 
-                    <button className="btn btn-dark" onClick={removeExtraSpaces}>
+                    <button
+                        className="btn btn-dark my-2"
+                        onClick={removeExtraSpaces}
+                    >
                         Remove Extra Spaces
                     </button>
 
-                    <button className="btn btn-dark" onClick={copyText}>
+                    <button className="btn btn-dark my-2" onClick={copyText}>
                         Copy Text
                     </button>
 
-                    <button className="btn btn-dark" onClick={clear}>
+                    <button className="btn btn-dark my-2" onClick={clear}>
                         Clear
                     </button>
                 </div>
-                <div className="container text-center my-5 " >
-                    <h3>Your Text Summery</h3>
-                    <p>
-                        {text.split(" ").filter((element)=>{return element.length!==0}).length} Words | {text.length}{" "}
-                        Characters
-                    </p>
-                    <p>{text.split(" ").length * 0.008} Minutes to read </p>
+
+                <div
+                    className={`card mx-auto my-3 text-bg-${props.mode} text-center`}
+                    style={{ width: "18rem" }}
+                >
+                    <div className="card-body">
+                        <h5 className="card-title">Your Text Summery</h5>
+                        <p className="card-text">
+                            {
+                                text.split(" ").filter((element) => {
+                                    return element.length !== 0;
+                                }).length
+                            }{" "}
+                            Words | {text.length} Characters
+                        </p>
+                        <p className="card-text">
+                            {text.split(" ").filter((element) => {
+                                return element.length !== 0;
+                            }).length * 0.008}{" "}
+                            Minutes to read{" "}
+                        </p>
+                    </div>
                 </div>
+
                 <h3>Preview</h3>
-                <p>{text.length > 0 ? text : "Enter something to Preview it here"}</p>
+                <p>
+                    {text.length > 0
+                        ? text
+                        : "Enter something to Preview it here"}
+                </p>
             </div>
         </>
     );

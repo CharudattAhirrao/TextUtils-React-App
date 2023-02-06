@@ -1,13 +1,22 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
-import { useState } from "react";
+import { useState} from "react";
 import Alert from "./components/Alert";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
     const [mode, setMode] = useState("light");
+
+    const [alert, setAlert] = useState(null);
+
+    const showAlert = (message, type) => {
+        setAlert({ message: message, type: type });
+        setTimeout(() => {
+            setAlert(null);
+        }, 1500);
+    };
 
     const toggleMode = () => {
         if (mode === "light") {
@@ -29,27 +38,34 @@ function App() {
         }
     };
 
-    const [alert, setAlert] = useState(null);
+    
 
-    const showAlert = (message, type) => {
-        setAlert({ message: message, type: type });
-        setTimeout(() => {
-            setAlert(null);
-        }, 1500);
-    };
     return (
         <>
-            <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+            <Router>
+                <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
 
-            <Alert alerts={alert} mode={mode} />
-
-            <div className="container p-5 my-3">
-                <TextForm
-                    heading="Enter the text to analyze"
-                    showAlert={showAlert}
-                />
-                {/* <About/> */}
-            </div>
+                <Alert alert={alert} mode={mode} />
+                <div className="container p-5 my-3">
+                    <Routes>
+                        <Route
+                            exact
+                            path="/TextUtils-React-App"
+                            element={
+                                <div className="container my-3">
+                                    <TextForm
+                                        heading="Enter the text to analyze"
+                                        showAlert={showAlert}
+                                        mode={mode}
+                                        pageTitle = "TextUtils - Home"
+                                    />
+                                </div>
+                            }
+                        />
+                        <Route exact path="/about" element={<About pageTitle = {"TextUtils - About"}/>} />
+                    </Routes>
+                </div>
+            </Router>
         </>
     );
 }

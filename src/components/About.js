@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-export default function About() {
+export default function About(props) {
+    
+    document.title = props.pageTitle;
+        
     const [aboutStyle, setAboutStyle] = useState({
         backgroundColor: "#000",
         color: "#fff",
